@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Pokemon</string>
+    <string name="nome_do_pokemon">Nome do pokemon</string>
+    <string name="buscar">Buscar</string>
+    <string name="retornar">Retornar</string>
+    <string name="favoritos">Meus favoritos</string>
+    <string name="lista_pokemons">Lista de pokemons</string>
+    <string name="mostrar_pokemons">Visualizar mais pokemons</string>
+    <string name="fogo">Fogo</string>
+    <string name="voador">Voador</string>
+    <string name="sexo_masculino">♂</string>
+    <string name="sexo_feminino">♀</string>
+</resources>
