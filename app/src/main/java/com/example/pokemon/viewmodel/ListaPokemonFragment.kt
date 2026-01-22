@@ -1,5 +1,6 @@
 package com.example.pokemon.viewmodel
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.pokemon.DetalhesActivity
 import com.example.pokemon.adapter.PokemonListAdapter
 import com.example.pokemon.databinding.ActivityListaPokemonBinding
 class ListaPokemonFragment : Fragment() {
@@ -15,7 +17,8 @@ class ListaPokemonFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: PokemonListViewModel
 
-    // Inflar o layout
+    // Declara o adapter como variável da classe para usar em vários lugares
+    private lateinit var adapter: PokemonListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +28,6 @@ class ListaPokemonFragment : Fragment() {
         return binding.root
     }
 
-    // Configura a lógica
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -35,25 +36,55 @@ class ListaPokemonFragment : Fragment() {
         setupRecyclerView()
         observeViewModel()
 
+        // Carrega dados iniciais apenas se a lista estiver vazia
+
+        if (viewModel.pokemonList.value.isNullOrEmpty()) {
+            viewModel.loadPokemons()
+        }
+
         binding.btnCarregarMais.setOnClickListener {
             viewModel.loadPokemons()
         }
     }
     private fun setupRecyclerView() {
+
+        // Inicializa o adapter uma única vez com lista vazia e a lógica de clique
+
+        adapter = PokemonListAdapter(emptyList()) { url ->
+
+            // Lógica para extrair o ID e abrir os detalhes
+
+            val pokemonId = url.split("/").dropLast(1).last()
+
+            val intent = Intent(requireContext(), DetalhesActivity::class.java)
+            intent.putExtra("POKEMON_ID", pokemonId)
+            startActivity(intent)
+        }
+
         binding.rvListaPokemon.layoutManager = GridLayoutManager(context, 3)
+
+        binding.rvListaPokemon.adapter = adapter
     }
     private fun observeViewModel() {
         viewModel.pokemonList.observe(viewLifecycleOwner) { listaPokemons ->
-            // Atualiza o adapter sem passar função de clique
-            val adapter = PokemonListAdapter(listaPokemons)
-            binding.rvListaPokemon.adapter = adapter
+            adapter.updateList(listaPokemons)
         }
 
-        // Observa erros ou carregamento
+        // Observa o estado de carregamento
 
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
-                Toast.makeText(requireContext(), "Carregando...", Toast.LENGTH_SHORT).show()
+
+                // Se estiver carregando, mostra a barra e esconde o botão "Carregar Mais"
+
+                binding.progressBar.visibility = View.VISIBLE
+                binding.btnCarregarMais.isEnabled = false // Evita cliques duplos
+            } else {
+
+                // Quando terminar, esconde a barra e libera o botão
+
+                binding.progressBar.visibility = View.GONE
+                binding.btnCarregarMais.isEnabled = true
             }
         }
     }

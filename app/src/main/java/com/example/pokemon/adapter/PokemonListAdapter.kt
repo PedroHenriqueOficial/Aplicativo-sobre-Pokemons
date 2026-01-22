@@ -7,7 +7,8 @@ import com.bumptech.glide.Glide
 import com.example.pokemon.databinding.ItemPokemonGridBinding
 import com.example.pokemon.model.PokemonResult
 class PokemonListAdapter(
-    private val pokemonList: List<PokemonResult>,
+    private var pokemonList: List<PokemonResult>,
+    private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>() {
 
     // Cria o visual do item (infla o layout)
@@ -26,6 +27,11 @@ class PokemonListAdapter(
     }
 
     override fun getItemCount() = pokemonList.size
+
+    fun updateList(newList: List<PokemonResult>) {
+        pokemonList = newList // Atualiza a lista interna
+        notifyDataSetChanged() // Avisa a tela para se atualizar (sem resetar o scroll)
+    }
     inner class PokemonViewHolder(private val binding: ItemPokemonGridBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemon: PokemonResult) {
