@@ -24,6 +24,15 @@
         </activity>
 
         <activity
+            android:name=".LoginActivity" />
+
+        <activity
+            android:name=".RegisterActivity" />
+
+        <activity
+            android:name=".TrocarSenhaActivity" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
 

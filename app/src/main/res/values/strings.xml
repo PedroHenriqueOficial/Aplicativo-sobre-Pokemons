@@ -10,4 +10,17 @@
     <string name="voador">Voador</string>
     <string name="sexo_masculino">♂</string>
     <string name="sexo_feminino">♀</string>
+    <string name="login">Login</string>
+    <string name="senha">Senha</string>
+    <string name="esqueci_senha">Esqueci a senha</string>
+    <string name="trocar_senha">Trocar de senha</string>
+    <string name="cadastrar">Cadastra-se</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="nome">Nome</string>
+    <string name="nick">Nick</string>
+    <string name="email">Email</string>
+    <string name="senha_1">Senha 1</string>
+    <string name="senha_2">Senha 2</string>
+    <string name="finalizar_cadastro">Finalizar cadastro</string>
+    <string name="entrar">Entrar</string>
 </resources>

@@ -15,6 +15,7 @@ import com.example.pokemon.viewmodel.PokemonDetailViewModel
 class DetalhesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBuscaBinding
     private lateinit var viewModel: PokemonDetailViewModel
+    private var isFirstLoad = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,25 @@ class DetalhesActivity : AppCompatActivity() {
             } else {
                 binding.ivFavorite.setImageResource(R.drawable.ic_heart_outline)
             }
+
+            // Lógica do Snackbar
+
+            if (!isFirstLoad) {
+                val mensagem = if (isFav) "Adicionado aos favoritos" else "Removido dos favoritos"
+
+                com.google.android.material.snackbar.Snackbar.make(
+                    binding.root,
+                    mensagem,
+                    com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
+                ).setAction("Desfazer") {
+
+                    // Ação para desfazer o clique
+
+                    viewModel.toggleFavorite()
+                }.show()
+            }
+
+            isFirstLoad = false
         }
 
         // Configura o Clique no Coração

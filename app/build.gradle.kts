@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -77,4 +78,14 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     kapt("androidx.room:room-compiler:$room_version") // Necessário adicionar o plugin kapt
+
+    implementation("com.google.android.material:material:1.x.x")
+
+    // Firebase
+
+    implementation(platform("com.google.firebase:firebase-bom:34.8.0"))
+    implementation("com.google.firebase:firebase-analytics") // Estatísticas
+    implementation("com.google.firebase:firebase-auth") // Autenticação
+    implementation("com.google.firebase:firebase-database") // Banco de Dados Realtime
+    implementation ("com.google.firebase:firebase-common-ktx:20.2.0")
 }

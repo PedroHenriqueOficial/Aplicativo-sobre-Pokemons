@@ -8,7 +8,8 @@ import com.example.pokemon.databinding.ItemPokemonFavoritoBinding
 import com.example.pokemon.model.PokemonEntity
 class FavoritesAdapter(
     private val favoritesList: List<PokemonEntity>,
-    private val onItemClick: (Int) -> Unit
+    private val onItemClick: (Int) -> Unit,
+    private val onFavoriteClick: (PokemonEntity) -> Unit
 ) : RecyclerView.Adapter<FavoritesAdapter.FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -39,6 +40,12 @@ class FavoritesAdapter(
 
             itemView.setOnClickListener {
                 onItemClick(pokemon.id)
+            }
+
+            // Configura o clique no botão de coração
+
+            binding.ivFavIcon.setOnClickListener {
+                onFavoriteClick(pokemon)
             }
         }
     }
