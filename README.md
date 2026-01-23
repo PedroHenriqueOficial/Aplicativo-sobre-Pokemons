@@ -5,7 +5,7 @@ O presente repositório tem como objetivo apresentar um aplicativo sobre pokemon
 
 Quer testar o app no seu Android? Baixe o APK assinado abaixo:
 
-[![Download APK](https://img.shields.io/badge/Download-APK-success?style=for-the-badge&logo=android)]([COLE_O_LINK_QUE_VOCE_COPIOU_AQUI](https://github.com/PedroHenriqueOficial/Aplicativo-sobre-Pokemons/releases/download/1.0/app-release.apk))
+[![Download APK](https://img.shields.io/badge/Download-APK-success?style=for-the-badge&logo=android)]([https://github.com/PedroHenriqueOficial/Aplicativo-sobre-Pokemons/releases/download/1.0/app-release.apk])
 
 ## 🛠️ Configuração do Firebase (Importante)
 
